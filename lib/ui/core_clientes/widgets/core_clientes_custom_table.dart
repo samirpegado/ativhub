@@ -294,9 +294,11 @@ class _CoreClientesCustomTableState extends State<CoreClientesCustomTable> {
                           // layout "card" (mobile)
                           return InkWell(
                             onTap: () {
-                              _appState.updateCoreClientesModel(
-                                  coreClientesModel: e);
-                              context.push('/clientes/detalhes');
+                                  _repo.buscarClientePorId(e.id).then((cliente) {
+                                _appState.updateCoreClientesModel(
+                                    coreClientesModel: CoreClientesModel.fromJson(cliente.toJson()));
+                                context.push('/clientes/detalhes');
+                              });
                             },
                             child: Container(
                               margin: const EdgeInsets.symmetric(vertical: 8),
