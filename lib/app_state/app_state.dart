@@ -5,6 +5,7 @@ import 'package:repsys/domain/models/catalogo_filtro_model.dart';
 import 'package:repsys/domain/models/clientes_filtro_model.dart';
 import 'package:repsys/domain/models/core_clientes_filtro_model.dart';
 import 'package:repsys/domain/models/core_clientes_model.dart';
+import 'package:repsys/domain/models/core_planos_manutencao_filtro_model.dart';
 import 'package:repsys/domain/models/despesa.dart';
 import 'package:repsys/domain/models/register_data_model.dart';
 import 'package:repsys/domain/models/user_empresa_models.dart';
@@ -138,6 +139,34 @@ class AppState extends ChangeNotifier {
             ativo: ativo,
             dataCriacaoInicial: dataCriacaoInicial,
             dataCriacaoFinal: dataCriacaoFinal,
+          );
+
+    notifyListeners();
+  }
+
+  CorePlanosManutencaoFiltroModel? _planosManutencaoFiltro;
+
+  CorePlanosManutencaoFiltroModel? get planosManutencaoFiltro => _planosManutencaoFiltro;
+
+  Future<void> updatePlanosManutencaoFiltro({
+    Object? busca = CorePlanosManutencaoFiltroModel.kUnset,
+    Object? tipo = CorePlanosManutencaoFiltroModel.kUnset,
+    bool replaceAll = false,
+  }) async {
+    final current = _planosManutencaoFiltro ?? const CorePlanosManutencaoFiltroModel();
+
+    _planosManutencaoFiltro = replaceAll
+        ? CorePlanosManutencaoFiltroModel(
+            busca: identical(busca, CorePlanosManutencaoFiltroModel.kUnset)
+                ? null
+                : busca as String?,
+            tipo: identical(tipo, CorePlanosManutencaoFiltroModel.kUnset)
+                ? null
+                : tipo as String?,
+          )
+        : current.copyWith(
+            busca: busca,
+            tipo: tipo,
           );
 
     notifyListeners();

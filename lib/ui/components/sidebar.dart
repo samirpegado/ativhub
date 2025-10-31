@@ -20,6 +20,7 @@ class _SidebarState extends State<Sidebar> {
     super.initState();
     _appState = context.read<AppState>();
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -76,6 +77,7 @@ class _SidebarState extends State<Sidebar> {
                   const SizedBox(height: 16),
                   Container(
                     width: double.infinity,
+                    height: 75,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         color: AppColors.whiteTransparent),
@@ -84,27 +86,14 @@ class _SidebarState extends State<Sidebar> {
                       child: Row(
                         children: [
                           Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(_appState.empresa?.nomeFantasia ?? '',
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500,
-                                    )),
-                                SizedBox(height: 8),
-                                Text('Premium',
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                      color: AppColors.secondaryText,
-                                      fontSize: 14,
-                                    )),
-                              ],
-                            ),
+                            child: Text(_appState.empresa?.nomeFantasia ?? '',
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                )),
                           ),
                           SizedBox(width: 8),
                           Icon(Icons.settings_rounded,

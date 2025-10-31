@@ -12,6 +12,7 @@ import 'package:repsys/domain/models/core_at_categorias_model.dart';
 import 'package:repsys/domain/models/core_planos_manutencao_model.dart';
 import 'package:repsys/ui/core/themes/colors.dart';
 import 'package:repsys/ui/core/ui/input_decorations.dart';
+import 'package:repsys/utils/constants.dart';
 import 'package:repsys/utils/image_helper.dart';
 
 class FormAtivo extends StatefulWidget {
@@ -377,12 +378,12 @@ class _FormAtivoState extends State<FormAtivo> {
                                 label: 'Status',
                                 icon: Icons.info_outline,
                               ),
-                              items: const [
-                                DropdownMenuItem(value: 'ativo', child: Text('Ativo')),
-                                DropdownMenuItem(value: 'inativo', child: Text('Inativo')),
-                                DropdownMenuItem(value: 'em_manutencao', child: Text('Em Manutenção')),
-                                DropdownMenuItem(value: 'baixado', child: Text('Baixado')),
-                              ],
+                              items: statusAtivos.map((status) {
+                                return DropdownMenuItem<String>(
+                                  value: status.value,
+                                  child: Text(status.label),
+                                );
+                              }).toList(),
                               onChanged: (value) {
                                 if (value != null) {
                                   setState(() => _status = value);

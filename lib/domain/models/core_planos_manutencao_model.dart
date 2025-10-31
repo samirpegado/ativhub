@@ -4,9 +4,7 @@ class CorePlanosManutencaoModel {
   final String? empresaId;
   final String? nome;
   final String? descricao;
-  final String? tipo;
-  final String? frequencia;
-  final List<Map<String, dynamic>>? checklist;
+  final String? tipoPlano;
 
   CorePlanosManutencaoModel({
     this.id,
@@ -14,9 +12,7 @@ class CorePlanosManutencaoModel {
     this.empresaId,
     this.nome,
     this.descricao,
-    this.tipo,
-    this.frequencia,
-    this.checklist,
+    this.tipoPlano,
   });
 
   factory CorePlanosManutencaoModel.fromJson(Map<String, dynamic> json) {
@@ -28,11 +24,7 @@ class CorePlanosManutencaoModel {
       empresaId: json['empresa_id'],
       nome: json['nome'],
       descricao: json['descricao'],
-      tipo: json['tipo'],
-      frequencia: json['frequencia'],
-      checklist: json['checklist'] != null
-          ? List<Map<String, dynamic>>.from(json['checklist'])
-          : null,
+      tipoPlano: json['tipo_plano'],
     );
   }
 
@@ -43,9 +35,16 @@ class CorePlanosManutencaoModel {
       'empresa_id': empresaId,
       'nome': nome,
       'descricao': descricao,
-      'tipo': tipo,
-      'frequencia': frequencia,
-      'checklist': checklist,
+      'tipo_plano': tipoPlano,
+    };
+  }
+
+  Map<String, dynamic> toJsonCreate() {
+    return {
+      'empresa_id': empresaId,
+      'nome': nome,
+      'descricao': descricao,
+      'tipo_plano': tipoPlano,
     };
   }
 }

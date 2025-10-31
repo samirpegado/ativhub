@@ -16,15 +16,35 @@ class _MenuItensState extends State<MenuItens> {
     final currentLocation = GoRouterState.of(context).uri.toString();
 
     final items = <_MenuItem>[
-      _MenuItem(title: 'Dashboard',         icon: Icons.space_dashboard,         route: Routes.dashboard),
-      _MenuItem(title: 'Clientes',          icon: Icons.groups_2,                route: Routes.clientes),
-      _MenuItem(title: 'Ativos',            icon: Icons.precision_manufacturing, route: Routes.ativos),
-      _MenuItem(title: 'Planos',            icon: Icons.calendar_month,          route: Routes.planos),
-      _MenuItem(title: 'Ordens de Serviço', icon: Icons.assignment_turned_in,   route: Routes.ordensServico),
-      _MenuItem(title: 'Checklists',        icon: Icons.checklist,               route: Routes.checklists),
-      _MenuItem(title: 'Faturamento',       icon: Icons.request_quote,           route: Routes.faturamento),
-      _MenuItem(title: 'Fornecedores',      icon: Icons.local_shipping,          route: Routes.fornecedores),
-      _MenuItem(title: 'Relatórios',        icon: Icons.bar_chart,               route: Routes.relatorios),
+      _MenuItem(
+          title: 'Dashboard',
+          icon: Icons.space_dashboard,
+          route: Routes.dashboard),
+      _MenuItem(
+          title: 'Clientes', icon: Icons.groups_2, route: Routes.clientes),
+      _MenuItem(
+          title: 'Ativos',
+          icon: Icons.precision_manufacturing,
+          route: Routes.ativos),
+      _MenuItem(title: 'Planos', icon: Icons.description, route: Routes.planos),
+      _MenuItem(
+          title: 'Planejamento',
+          icon: Icons.calendar_month,
+          route: Routes.checklists),
+      _MenuItem(
+          title: 'Ordens de Serviço',
+          icon: Icons.assignment_turned_in,
+          route: Routes.ordensServico),
+      _MenuItem(
+          title: 'Faturamento',
+          icon: Icons.request_quote,
+          route: Routes.faturamento),
+      _MenuItem(
+          title: 'Fornecedores',
+          icon: Icons.local_shipping,
+          route: Routes.fornecedores),
+      _MenuItem(
+          title: 'Relatórios', icon: Icons.bar_chart, route: Routes.relatorios),
     ];
 
     return Column(
@@ -56,7 +76,8 @@ class _MenuItensState extends State<MenuItens> {
     required VoidCallback onTap,
   }) {
     // Cores de estado
-    final Color textColor = isSelected ? AppColors.secondary : AppColors.secondaryText;
+    final Color textColor =
+        isSelected ? AppColors.secondary : AppColors.secondaryText;
     final Color bgSelected = AppColors.secondary.withValues(alpha: 0.08);
 
     return InkWell(
@@ -69,7 +90,9 @@ class _MenuItensState extends State<MenuItens> {
           color: isSelected ? bgSelected : Colors.transparent,
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
-            color: isSelected ? AppColors.secondary.withValues(alpha: 0.25) : Colors.transparent,
+            color: isSelected
+                ? AppColors.secondary.withValues(alpha: 0.25)
+                : Colors.transparent,
             width: 1,
           ),
           boxShadow: isSelected
@@ -120,5 +143,6 @@ class _MenuItem {
   final String title;
   final IconData icon;
   final String route;
-  const _MenuItem({required this.title, required this.icon, required this.route});
+  const _MenuItem(
+      {required this.title, required this.icon, required this.route});
 }

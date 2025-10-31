@@ -21,6 +21,7 @@ import 'package:repsys/ui/auth/widgets/signup.dart';
 import 'package:repsys/ui/auth/widgets/verify.dart';
 import 'package:repsys/ui/core_clientes/widgets/core_clientes.dart';
 import 'package:repsys/ui/core_clientes/widgets/core_clientes_detalhes.dart';
+import 'package:repsys/ui/planos/widgets/planos.dart';
 import 'package:repsys/ui/main/view_models/main_layout_viewmodel.dart';
 import 'package:repsys/ui/main/widgets/main_layout.dart';
 import 'package:repsys/ui/pages/placeholder_page.dart';
@@ -112,10 +113,7 @@ GoRouter router(AuthRepository authRepository, AppState appState) => GoRouter(
             pageBuilder: (context, state) {
               return buildPageWithTransition(
                 state: state,
-                child: PlaceholderPage(
-                  title: 'Planos',
-                  icon: Icons.calendar_month,
-                ),
+                child: const Planos(),
               );
             },
           ),
