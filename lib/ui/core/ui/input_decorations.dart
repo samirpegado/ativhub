@@ -37,7 +37,7 @@ class AppInputDecorations {
     );
   }
 
-    static InputDecoration dropdownNoLabel({
+  static InputDecoration dropdownNoLabel({
     IconData? icon,
     Widget? suffix,
   }) {
@@ -76,7 +76,6 @@ class AppInputDecorations {
       labelText: label,
       labelStyle: const TextStyle(color: AppColors.primaryText, fontSize: 14),
       hintStyle: const TextStyle(color: AppColors.secondaryText, fontSize: 14),
-
       suffixIcon: InkWell(
         onTap: onToggleVisibility,
         child: Icon(
@@ -103,8 +102,6 @@ class AppInputDecorations {
       ),
     );
   }
-
-  
 }
 
 class DiaMesInputFormatter extends TextInputFormatter {
@@ -132,4 +129,3 @@ class DiaMesInputFormatter extends TextInputFormatter {
     );
   }
 }
-

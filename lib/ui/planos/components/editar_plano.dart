@@ -54,15 +54,14 @@ class _EditarPlanoState extends State<EditarPlano> {
       // Converte os checklists para grupos internos
       final grupos = <_ChecklistGroup>[];
       for (var checklist in checklists) {
-        if (checklist.recorrencia != null && checklist.tituloChecklist != null) {
+        if (checklist.recorrencia != null &&
+            checklist.tituloChecklist != null) {
           // Cria itens para cada título do array
-          final itens = checklist.tituloChecklist!
-              .map((titulo) {
-                final item = _ChecklistItem();
-                item.tituloController.text = titulo;
-                return item;
-              })
-              .toList();
+          final itens = checklist.tituloChecklist!.map((titulo) {
+            final item = _ChecklistItem();
+            item.tituloController.text = titulo;
+            return item;
+          }).toList();
 
           grupos.add(_ChecklistGroup(
             recorrencia: checklist.recorrencia!,
@@ -121,7 +120,7 @@ class _EditarPlanoState extends State<EditarPlano> {
 
   void _adicionarGrupoChecklist() {
     final disponiveis = _getRecorrenciasDisponiveis();
-    
+
     if (disponiveis.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -150,7 +149,7 @@ class _EditarPlanoState extends State<EditarPlano> {
 
   void _editarGrupoChecklist(int index) {
     final group = _checklistGroups[index];
-    
+
     // Mostra modal para editar recorrência e itens
     showDialog(
       context: context,
@@ -217,7 +216,8 @@ class _EditarPlanoState extends State<EditarPlano> {
                     ),
                     IconButton(
                       onPressed: () => Navigator.of(context).pop(),
-                      icon: Icon(Icons.close_rounded, color: AppColors.primaryText),
+                      icon: Icon(Icons.close_rounded,
+                          color: AppColors.primaryText),
                     ),
                   ],
                 ),
@@ -254,7 +254,8 @@ class _EditarPlanoState extends State<EditarPlano> {
                                       child: DropdownButtonFormField<String>(
                                         value: _tipoPlano,
                                         items: tipoPlanos
-                                            .map((item) => DropdownMenuItem<String>(
+                                            .map((item) =>
+                                                DropdownMenuItem<String>(
                                                   value: item.value,
                                                   child: Text(item.label),
                                                 ))
@@ -284,9 +285,11 @@ class _EditarPlanoState extends State<EditarPlano> {
                                       flex: 2,
                                       child: TextFormField(
                                         controller: _nomeController,
-                                        textCapitalization: TextCapitalization.words,
+                                        textCapitalization:
+                                            TextCapitalization.words,
                                         validator: (value) {
-                                          if (value == null || value.trim().isEmpty) {
+                                          if (value == null ||
+                                              value.trim().isEmpty) {
                                             return 'Informe o nome do plano';
                                           }
                                           return null;
@@ -314,7 +317,8 @@ class _EditarPlanoState extends State<EditarPlano> {
 
                                 // === CHECKLIST ===
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       'Checklist',
@@ -331,20 +335,25 @@ class _EditarPlanoState extends State<EditarPlano> {
                                         onPressed: _adicionarGrupoChecklist,
                                         style: ButtonStyle(
                                           minimumSize:
-                                              const WidgetStatePropertyAll(Size(0, 40)),
+                                              const WidgetStatePropertyAll(
+                                                  Size(0, 40)),
                                           backgroundColor:
-                                              WidgetStatePropertyAll(AppColors.primary),
+                                              WidgetStatePropertyAll(
+                                                  AppColors.primary),
                                           shape: WidgetStateProperty.all<
                                               RoundedRectangleBorder>(
                                             RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(8.0),
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
                                             ),
                                           ),
                                         ),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
-                                            Icon(Icons.add, color: AppColors.secondary, size: 18),
+                                            Icon(Icons.add,
+                                                color: AppColors.secondary,
+                                                size: 18),
                                             const SizedBox(width: 6),
                                             Text('Adicionar Grupo',
                                                 style: TextStyle(
@@ -365,7 +374,8 @@ class _EditarPlanoState extends State<EditarPlano> {
                                     decoration: BoxDecoration(
                                       color: AppColors.grey1,
                                       borderRadius: BorderRadius.circular(8),
-                                      border: Border.all(color: AppColors.borderColor),
+                                      border: Border.all(
+                                          color: AppColors.borderColor),
                                     ),
                                     child: Center(
                                       child: Text(
@@ -378,7 +388,10 @@ class _EditarPlanoState extends State<EditarPlano> {
                                     ),
                                   )
                                 else
-                                  ..._checklistGroups.asMap().entries.map((entry) {
+                                  ..._checklistGroups
+                                      .asMap()
+                                      .entries
+                                      .map((entry) {
                                     final groupIndex = entry.key;
                                     final group = entry.value;
                                     return Container(
@@ -387,10 +400,12 @@ class _EditarPlanoState extends State<EditarPlano> {
                                       decoration: BoxDecoration(
                                         color: AppColors.grey1,
                                         borderRadius: BorderRadius.circular(8),
-                                        border: Border.all(color: AppColors.borderColor),
+                                        border: Border.all(
+                                            color: AppColors.borderColor),
                                       ),
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           // Header do grupo
                                           Row(
@@ -406,25 +421,35 @@ class _EditarPlanoState extends State<EditarPlano> {
                                                   Text(
                                                     'Recorrência: ${_getRecorrenciaLabel(group.recorrencia)}',
                                                     style: TextStyle(
-                                                      color: AppColors.primaryText,
+                                                      color:
+                                                          AppColors.primaryText,
                                                       fontSize: 15,
-                                                      fontWeight: FontWeight.bold,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                     ),
                                                   ),
                                                   const SizedBox(width: 8),
                                                   Container(
-                                                    padding: const EdgeInsets.symmetric(
-                                                        horizontal: 8, vertical: 4),
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                        horizontal: 8,
+                                                        vertical: 4),
                                                     decoration: BoxDecoration(
-                                                      color: AppColors.primary.withValues(alpha: 0.1),
-                                                      borderRadius: BorderRadius.circular(12),
+                                                      color: AppColors.primary
+                                                          .withValues(
+                                                              alpha: 0.1),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12),
                                                     ),
                                                     child: Text(
                                                       '${group.items.length} ${group.items.length == 1 ? 'item' : 'itens'}',
                                                       style: TextStyle(
-                                                        color: AppColors.primary,
+                                                        color:
+                                                            AppColors.primary,
                                                         fontSize: 12,
-                                                        fontWeight: FontWeight.w600,
+                                                        fontWeight:
+                                                            FontWeight.w600,
                                                       ),
                                                     ),
                                                   ),
@@ -434,19 +459,42 @@ class _EditarPlanoState extends State<EditarPlano> {
                                                 mainAxisSize: MainAxisSize.min,
                                                 children: [
                                                   IconButton(
-                                                    icon: Icon(Icons.edit_outlined,
-                                                        color: AppColors.primary, size: 20),
-                                                    onPressed: () => _editarGrupoChecklist(groupIndex),
+                                                    style: ButtonStyle(
+                                                      padding:
+                                                          WidgetStateProperty
+                                                              .all(EdgeInsets
+                                                                  .all(8)),
+                                                    ),
+                                                    icon: Icon(
+                                                        Icons.edit_outlined,
+                                                        color:
+                                                            AppColors.primary,
+                                                        size: 20),
+                                                    onPressed: () =>
+                                                        _editarGrupoChecklist(
+                                                            groupIndex),
                                                     padding: EdgeInsets.zero,
-                                                    constraints: const BoxConstraints(),
+                                                    constraints:
+                                                        const BoxConstraints(),
                                                     tooltip: 'Editar grupo',
                                                   ),
                                                   IconButton(
-                                                    icon: Icon(Icons.delete_outline,
-                                                        color: AppColors.error, size: 20),
-                                                    onPressed: () => _removerGrupo(groupIndex),
+                                                    style: ButtonStyle(
+                                                      padding:
+                                                          WidgetStateProperty
+                                                              .all(EdgeInsets
+                                                                  .all(8)),
+                                                    ),
+                                                    icon: Icon(
+                                                        Icons.delete_outline,
+                                                        color: AppColors.error,
+                                                        size: 20),
+                                                    onPressed: () =>
+                                                        _removerGrupo(
+                                                            groupIndex),
                                                     padding: EdgeInsets.zero,
-                                                    constraints: const BoxConstraints(),
+                                                    constraints:
+                                                        const BoxConstraints(),
                                                     tooltip: 'Excluir grupo',
                                                   ),
                                                 ],
@@ -455,20 +503,30 @@ class _EditarPlanoState extends State<EditarPlano> {
                                           ),
                                           const SizedBox(height: 16),
                                           // Lista de itens do grupo
-                                          ...group.items.asMap().entries.map((itemEntry) {
+                                          ...group.items
+                                              .asMap()
+                                              .entries
+                                              .map((itemEntry) {
                                             final itemIndex = itemEntry.key;
                                             final item = itemEntry.value;
-                                            final titulo = item.tituloController.text.trim();
-                                            if (titulo.isEmpty) return const SizedBox.shrink();
-                                            
+                                            final titulo = item
+                                                .tituloController.text
+                                                .trim();
+                                            if (titulo.isEmpty) {
+                                              return const SizedBox.shrink();
+                                            }
+
                                             return Container(
-                                              margin: const EdgeInsets.only(bottom: 12),
+                                              margin: const EdgeInsets.only(
+                                                  bottom: 12),
                                               padding: const EdgeInsets.all(12),
                                               decoration: BoxDecoration(
                                                 color: Colors.white,
-                                                borderRadius: BorderRadius.circular(6),
+                                                borderRadius:
+                                                    BorderRadius.circular(6),
                                                 border: Border.all(
-                                                    color: AppColors.borderColor),
+                                                    color:
+                                                        AppColors.borderColor),
                                               ),
                                               child: Row(
                                                 children: [
@@ -477,17 +535,21 @@ class _EditarPlanoState extends State<EditarPlano> {
                                                     height: 24,
                                                     decoration: BoxDecoration(
                                                       color: AppColors.primary
-                                                          .withValues(alpha: 0.1),
+                                                          .withValues(
+                                                              alpha: 0.1),
                                                       borderRadius:
-                                                          BorderRadius.circular(12),
+                                                          BorderRadius.circular(
+                                                              12),
                                                     ),
                                                     child: Center(
                                                       child: Text(
                                                         '${itemIndex + 1}',
                                                         style: TextStyle(
-                                                          color: AppColors.primary,
+                                                          color:
+                                                              AppColors.primary,
                                                           fontSize: 12,
-                                                          fontWeight: FontWeight.bold,
+                                                          fontWeight:
+                                                              FontWeight.bold,
                                                         ),
                                                       ),
                                                     ),
@@ -497,7 +559,8 @@ class _EditarPlanoState extends State<EditarPlano> {
                                                     child: Text(
                                                       titulo,
                                                       style: TextStyle(
-                                                        color: AppColors.primaryText,
+                                                        color: AppColors
+                                                            .primaryText,
                                                         fontSize: 14,
                                                       ),
                                                     ),
@@ -513,7 +576,8 @@ class _EditarPlanoState extends State<EditarPlano> {
                                 const SizedBox(height: 24),
 
                                 // === AÇÕES ===
-                                Divider(height: 1, color: AppColors.borderColor),
+                                Divider(
+                                    height: 1, color: AppColors.borderColor),
                                 const SizedBox(height: 16),
                               ],
                             ),
@@ -549,18 +613,22 @@ class _EditarPlanoState extends State<EditarPlano> {
                           child: TextButton(
                             onPressed: () => Navigator.of(context).pop(),
                             style: ButtonStyle(
-                              minimumSize: const WidgetStatePropertyAll(Size(0, 50)),
-                              shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                              minimumSize:
+                                  const WidgetStatePropertyAll(Size(0, 50)),
+                              shape: WidgetStateProperty.all<
+                                  RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
                               ),
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16.0),
                               child: Text('Cancelar',
                                   style: TextStyle(
-                                      color: AppColors.primaryText, fontSize: 14)),
+                                      color: AppColors.primaryText,
+                                      fontSize: 14)),
                             ),
                           ),
                         ),
@@ -573,14 +641,18 @@ class _EditarPlanoState extends State<EditarPlano> {
                               onPressed: vm.isSaving
                                   ? null
                                   : () async {
-                                      if (!_formKey.currentState!.validate()) return;
+                                      if (!_formKey.currentState!.validate()) {
+                                        return;
+                                      }
 
                                       // Validações adicionais
-                                      if (_tipoPlano == null || _tipoPlano!.isEmpty) {
+                                      if (_tipoPlano == null ||
+                                          _tipoPlano!.isEmpty) {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(
                                           const SnackBar(
-                                            content: Text('Selecione o tipo de plano'),
+                                            content: Text(
+                                                'Selecione o tipo de plano'),
                                             backgroundColor: AppColors.error,
                                           ),
                                         );
@@ -600,22 +672,22 @@ class _EditarPlanoState extends State<EditarPlano> {
                                       }
 
                                       // Converter grupos de checklist (agrupa títulos por recorrência)
-                                      final checklistsModels = <CorePlanosChecklistModel>[];
+                                      final checklistsModels =
+                                          <CorePlanosChecklistModel>[];
                                       for (var group in _checklistGroups) {
                                         // Coleta todos os títulos válidos do grupo
                                         final titulos = group.items
-                                            .map((item) =>
-                                                item.tituloController.text
-                                                    .trim())
-                                            .where((titulo) =>
-                                                titulo.isNotEmpty)
+                                            .map((item) => item
+                                                .tituloController.text
+                                                .trim())
+                                            .where(
+                                                (titulo) => titulo.isNotEmpty)
                                             .toList();
 
                                         if (titulos.isNotEmpty) {
-                                          checklistsModels.add(
-                                              CorePlanosChecklistModel(
-                                            recorrencia:
-                                                group.recorrencia,
+                                          checklistsModels
+                                              .add(CorePlanosChecklistModel(
+                                            recorrencia: group.recorrencia,
                                             tituloChecklist: titulos,
                                           ));
                                         }
@@ -648,20 +720,19 @@ class _EditarPlanoState extends State<EditarPlano> {
                                             .showSnackBar(
                                           SnackBar(
                                               content: Text(erro),
-                                              backgroundColor:
-                                                  AppColors.error),
+                                              backgroundColor: AppColors.error),
                                         );
                                       }
                                     },
                               style: ButtonStyle(
-                                minimumSize: const WidgetStatePropertyAll(Size(0, 50)),
+                                minimumSize:
+                                    const WidgetStatePropertyAll(Size(0, 50)),
                                 backgroundColor:
                                     WidgetStatePropertyAll(AppColors.primary),
                                 shape: WidgetStateProperty.all<
                                     RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.circular(8.0),
+                                    borderRadius: BorderRadius.circular(8.0),
                                   ),
                                 ),
                               ),
@@ -743,9 +814,10 @@ class _DialogAdicionarGrupoChecklistState
   @override
   void initState() {
     super.initState();
-    _isEditMode = widget.recorrenciaInicial != null && widget.itensIniciais != null;
+    _isEditMode =
+        widget.recorrenciaInicial != null && widget.itensIniciais != null;
     _recorrenciaSelecionada = widget.recorrenciaInicial;
-    
+
     if (_isEditMode && widget.itensIniciais != null) {
       // Clona os itens iniciais para não modificar os originais diretamente
       for (var item in widget.itensIniciais!) {
@@ -788,8 +860,9 @@ class _DialogAdicionarGrupoChecklistState
     }
 
     // Validar que tem pelo menos um item preenchido
-    final itensValidos = _itens.where((item) =>
-        item.tituloController.text.trim().isNotEmpty).toList();
+    final itensValidos = _itens
+        .where((item) => item.tituloController.text.trim().isNotEmpty)
+        .toList();
 
     if (itensValidos.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -824,7 +897,9 @@ class _DialogAdicionarGrupoChecklistState
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      _isEditMode ? 'Editar Grupo de Checklist' : 'Adicionar Grupo de Checklist',
+                      _isEditMode
+                          ? 'Editar Grupo de Checklist'
+                          : 'Adicionar Grupo de Checklist',
                       style: TextStyle(
                         color: AppColors.primaryText,
                         fontSize: 18,
@@ -890,8 +965,8 @@ class _DialogAdicionarGrupoChecklistState
                                 const WidgetStatePropertyAll(Size(0, 36)),
                             backgroundColor:
                                 WidgetStatePropertyAll(AppColors.primary),
-                            shape: WidgetStateProperty.all<
-                                RoundedRectangleBorder>(
+                            shape:
+                                WidgetStateProperty.all<RoundedRectangleBorder>(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
@@ -956,7 +1031,8 @@ class _DialogAdicionarGrupoChecklistState
                                       width: 28,
                                       height: 28,
                                       decoration: BoxDecoration(
-                                        color: AppColors.primary.withValues(alpha: 0.1),
+                                        color: AppColors.primary
+                                            .withValues(alpha: 0.1),
                                         borderRadius: BorderRadius.circular(14),
                                       ),
                                       child: Center(
@@ -1015,15 +1091,15 @@ class _DialogAdicionarGrupoChecklistState
                         style: ButtonStyle(
                           minimumSize:
                               const WidgetStatePropertyAll(Size(0, 50)),
-                          shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                          shape:
+                              WidgetStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8.0),
                             ),
                           ),
                         ),
                         child: Padding(
-                          padding:
-                              const EdgeInsets.symmetric(horizontal: 16.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
                           child: Text('Cancelar',
                               style: TextStyle(
                                   color: AppColors.primaryText, fontSize: 14)),
@@ -1041,15 +1117,15 @@ class _DialogAdicionarGrupoChecklistState
                               const WidgetStatePropertyAll(Size(0, 50)),
                           backgroundColor:
                               WidgetStatePropertyAll(AppColors.primary),
-                          shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                          shape:
+                              WidgetStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8.0),
                             ),
                           ),
                         ),
                         child: Padding(
-                          padding:
-                              const EdgeInsets.symmetric(horizontal: 16.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
                           child: Text(_isEditMode ? 'Salvar' : 'Concluir',
                               style: TextStyle(
                                   color: AppColors.secondary, fontSize: 14)),
@@ -1066,4 +1142,3 @@ class _DialogAdicionarGrupoChecklistState
     );
   }
 }
-
